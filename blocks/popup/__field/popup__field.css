@@ -1,0 +1,14 @@
+.popup__field{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+
+
+@media (max-width:553px){
+    .popup__field{
+        max-width: 238px;
+    }
+}

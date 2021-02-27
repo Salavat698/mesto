@@ -1,0 +1,14 @@
+.profile__work{
+    margin: 0   ;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+@media screen and (max-width: 320px) {
+    .profile__work{
+        margin: auto;
+        padding-top: 15px;
+    }
+}

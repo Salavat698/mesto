@@ -1,0 +1,12 @@
+.element{
+    height: 361px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (max-width: 320px) {
+    .element{
+        height: 361px;
+    }
+}
