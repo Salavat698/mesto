@@ -6,7 +6,7 @@
     gap: 20px 17px;
     max-width: 880px;
 }
-@media (max-widht:320px){
+@media ( max-width:320px){
     .elements{
         margin-left: 19px;
         margin-right: 19px;
