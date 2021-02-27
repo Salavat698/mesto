@@ -39,7 +39,6 @@ function formSubmitHandler (evt) {
     // Вставьте новые значения с помощью textContent
     profileName.textContent = nameInput.value;// передаю значение с полей nameInput для profileName
     profileWork.textContent = workInput.value; // передаю значение с полей nameInput для profileName
-    popupSaveBtn();
     }
 
 
