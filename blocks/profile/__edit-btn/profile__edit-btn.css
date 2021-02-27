@@ -5,6 +5,8 @@
     width: 24px;
     height: 24px;
     background: black;
+    display: flex;
+    justify-content: center;
 }
 .profile__edit-btn:hover{
     opacity: 0.6;

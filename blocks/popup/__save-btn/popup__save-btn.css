@@ -16,6 +16,6 @@
 }
 @media (max-width:320px){
     .popup__save-btn{
-        max-width:238px
+        max-width:238px;
     }
 }
