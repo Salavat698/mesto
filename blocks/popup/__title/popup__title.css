@@ -6,13 +6,19 @@
     color: #000000;
     display: flex;
     align-self: flex-start;
-    margin: 0;
+    margin: 34px 64px 0 36px;
     padding: 0;
+}
+@media (max-width:558px){
+    .popup__title{
+        max-width: 238px;
+        font-size: 18px;
+        line-height: 22px;
+        margin-right: 0;
+    }
 }
 @media (max-width:320px){
     .popup__title{
-        font-weight: 900;
-        font-size: 18px;
-        line-height: 22px;
+        margin: 25px 22px 0 22px;
     }
 }

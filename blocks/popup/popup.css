@@ -1,4 +1,5 @@
 .popup{
+    display:none;
     align-items: center;
     justify-content: center;
     position: fixed;
@@ -6,17 +7,5 @@
     right: 0;
     bottom: 0;
     left: 0;
-    display: none;
-}
-.popup::before{
-    content: '';
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: #000000;
-    opacity: 0.5;
-    z-index: -1;
-
+    background-color: rgba(0,0,0, 0.5);
 }

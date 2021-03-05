@@ -4,9 +4,10 @@
     font-size: 18px;
     line-height: 22px;
     color: #545454;
+    margin: 0;
 }
 @media screen and (max-width: 320px) {
     .footer__copywriter{
-        margin: 48px 19px 36px 19px;
+        margin: auto 19px ;
     }
 }

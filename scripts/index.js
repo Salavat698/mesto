@@ -1,48 +1,32 @@
-let profileEditBtn = document.querySelector('section.profile button.profile__edit-btn');
-let popup = document.querySelector('section.popup');
-let popupClose = document.querySelector('section.popup button.popup__close')
-
-profileEditBtn.onclick = function(){
-    popup.style.display="flex";
-}
-popupClose.onclick = function(){
-    popup.style.display="none";
-}
-
-window.onclick = function(event){
-    if(event.target == popup){
-        popup.style.display="none"; // ФУНКЦИЯ ЗАКРЫТИЯ POPUP ВНЕ ЕГО РАМКИ
-    }
-}
-
+let profileEditBtn = document.querySelector('.profile__edit-btn');//кнопка редаетирование
+let popup = document.querySelector('.popup');//сам блок попап
+let popupClose = document.querySelector('.popup__close');//крестик на попап закрытие
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__container'); // Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__name'); // Воспользуйтесь инструментом .querySelector()
-let workInput =  document.querySelector('.popup__work');// Воспользуйтесь инструментом .querySelector()
+let nameInput = popup.querySelector('#name-input'); // Воспользуйтесь инструментом .querySelector()
+let workInput =  popup.querySelector('#work-input');// Воспользуйтесь инструментом .querySelector()
 let profileName = document.querySelector('.profile__name');// создал переменную для тега с классом profile__name
 let profileWork = document.querySelector('.profile__work');// создал переменную для тега с классомprofile__work
 
-let popupSaveBtn = document.querySelector('.popup__save-btn');// создаю переменную для кнопки сохранить с классом popup__save-btn
+function addPopup(){
+    popup.classList.add('popup_active');
+}
 
-popupSaveBtn.onclick = function(){
-    popup.style.display="none";
+function closePopup(){
+    popup.classList.remove('popup_active');
+    
 }
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
 
-    // Получите значение полей jobInput и nameInput из свойства value
-    // Выберите элементы, куда должны быть вставлены значения полей
-    // Вставьте новые значения с помощью textContent
     profileName.textContent = nameInput.value;// передаю значение с полей nameInput для profileName
     profileWork.textContent = workInput.value; // передаю значение с полей nameInput для profileName
-    }
-
-
-
+    closePopup();
+}
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
+profileEditBtn.addEventListener('click', addPopup); // принажатие на кнопку редактирование добавляю класс popup_active для popup
+popupClose.addEventListener('click', closePopup);  // принажатие на кнопку закрытие удаляю класс popup_active из popup

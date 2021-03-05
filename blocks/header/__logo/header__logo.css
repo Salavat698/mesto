@@ -2,6 +2,8 @@
     width: 142px;
     height: 33px;
     margin-top: 45px;
+    margin-bottom: 41px;
+    margin-left: 20px;
 }
 
 @media (max-width: 320px){

@@ -12,16 +12,12 @@
 }
 @media screen and (max-width: 824px) {
     .page-section {
-        padding-left: 20px;
-        padding-right: 20px;
         margin: 0 50px 0 50px;
     }
 }
 
 @media screen and (max-width: 334px) {
     .page-section {
-        padding-left: 20px;
-        padding-right: 20px;
         margin: auto;
     }
 }
