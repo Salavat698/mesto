@@ -1,19 +1,5 @@
 .page-section{
-    max-width:1280px;
     margin: auto;
-}
-
-@media screen and (max-width: 1275px) {
-    .page-section {
-        padding-left: 20px;
-        padding-right: 20px;
-        margin: 0;
-    }
-}
-@media screen and (max-width: 824px) {
-    .page-section {
-        margin: 0 50px 0 50px;
-    }
 }
 
 @media screen and (max-width: 334px) {
