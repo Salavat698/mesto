@@ -10,21 +10,21 @@
 <body class="body-background">
 
         <header class="header">
-            <img class="header__logo" src="./images/header-logo.svg" alt="Логотип">
+            <img class="header__logo" src="./images/header-logo.svg" alt="Логотип сайта путешествие">
         </header>
     
         <main class="page page-section">
     
             <section class="profile">
-                <img class="profile__avatar" src="./images/avata-kysto.jpg" alt="автарка">
+                <img class="profile__avatar" src="./images/avata-kysto.jpg" alt="автарка автора">
                 <div class="profile__info">
                     <div class="profile__header-info">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-btn" type="reset"><img class="profile__icon" src="./images/Edit-Button.svg" alt="кнопка"></button>
+                        <button class="profile__edit-btn" type="reset"><img class="profile__icon" src="./images/Edit-Button.svg" alt="кнопка добавление автора"></button>
                     </div>
                     <p class="profile__work">Исследователь океана</p>
                 </div>
-                <button class="profile__add-btn" type="reset"><img src="./images/add-vector.svg" alt="кнопка"></button>
+                <button class="profile__add-btn" type="reset"><img src="./images/add-vector.svg" alt="кнопка добавление фото"></button>
     
             </section>
     
@@ -78,29 +78,29 @@
                 </article>
             </section>
     
-            <section class="popup">
-    
-                <form class="popup__container">
-                    <button class="popup__close" type="button"></button>
-                    <h3 class="popup__title">Редактировать профиль</h3>
-    
-                    <div class="popup__field">
-                        <input  class="popup__input" id="name-input" type="text"  name="name" placeholder="Жак-Ив Кусто">
-                    </div>
-                    
-                    <div class="popup__field popup-position">
-                        <input  class="popup__input" id="work-input" type="text" name="work" placeholder="Исследователь океана">
-                    </div>
-                    <button type="submit" class="popup__save-btn">Сохранить</button>
-                </form>
-    
-            </section>
+           
         </main>
     
         <footer class="footer">
             <p class="footer__copywriter">	&#169; 2020 Mesto Russia</p>
         </footer>
+        <div class="popup">
+    
+            <form class="popup__container">
+                <button class="popup__close" type="button"></button>
+                <h3 class="popup__title">Редактировать профиль</h3>
 
+                <div class="popup__field">
+                    <input  class="popup__input" id="name-input" type="text"  name="name" placeholder="Жак-Ив Кусто">
+                </div>
+                
+                <div class="popup__field popup-position">
+                    <input  class="popup__input" id="work-input" type="text" name="work" placeholder="Исследователь океана">
+                </div>
+                <button type="submit" class="popup__save-btn">Сохранить</button>
+            </form>
+
+        </div>
     <script src="scripts/index.js"></script>
 </body>
 </html>

@@ -7,4 +7,12 @@
     white-space: nowrap;
     overflow: hidden;
     max-width: 220px;
+    margin-top: 22px;
+    margin-left: 3px;
+}
+
+@media (max-width:320px){
+    .element__place-travel{
+        
+    }
 }

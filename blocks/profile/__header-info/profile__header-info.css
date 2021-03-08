@@ -1,7 +1,9 @@
 .profile__header-info{
     display: flex;
     align-items: center;
+    
 }
+
 @media screen and (max-width: 624px) {
     .profile__header-info {
         font-style: normal;
@@ -14,7 +16,5 @@
 @media screen and (max-width: 320px) {
     .profile__header-info {
         margin-top: 22px;
-        padding-left: 65px;
-        padding-right: 43px;
     }
 }
