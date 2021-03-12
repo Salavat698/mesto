@@ -1,6 +1,6 @@
 .popup__close{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 45px;
     color: #FFFFFF;
     border: none;
     background:transparent;
@@ -8,11 +8,14 @@
     padding: 0;
     margin: 0;
     position: absolute;
-    top:-35px;
-    right: -35px;
+    top:-59px;
+    right: -32px;
     background-image: url('../../../images/close-icon.svg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+.popup__close:hover{
+    opacity: 0.6;
 }
 @media (max-width:553px){
     .popup__close{
@@ -22,3 +25,13 @@
         right: -5px;
     }
 }
+
+@media (max-width:320px){
+    .popup__close{
+        width: 36px;
+        height: 26px;
+        top: -50px;
+        right: 0px;
+    }
+}
+

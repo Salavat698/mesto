@@ -13,18 +13,18 @@
             <img class="header__logo" src="./images/header-logo.svg" alt="Логотип сайта путешествие">
         </header>
     
-        <main class="page page-section">
+        <main class="page">
     
             <section class="profile">
                 <img class="profile__avatar" src="./images/avata-kysto.jpg" alt="автарка автора">
                 <div class="profile__info">
                     <div class="profile__header-info">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-btn" type="reset"><img class="profile__icon" src="./images/Edit-Button.svg" alt="кнопка добавление автора"></button>
+                        <button class="profile__edit-btn" type="button"><img class="profile__icon" src="./images/Edit-Button.svg" alt="кнопка добавление автора"></button>
                     </div>
                     <p class="profile__work">Исследователь океана</p>
                 </div>
-                <button class="profile__add-btn" type="reset"><img src="./images/add-vector.svg" alt="кнопка добавление фото"></button>
+                <button class="profile__add-btn" type="button"><img src="./images/add-vector.svg" alt="кнопка добавление фото"></button>
     
             </section>
     
@@ -33,7 +33,7 @@
                     <img class="element__image" src="./images/Карачаевск.png" alt="пейзаж Карачаево-черкесия">
                     <div class="element__footer">
                         <h2 class="element__place-travel"> Карачаево-черкесия</h2>
-                        <button class="element__like element__like_active" type="reset" aria-label="Like"></button>
+                        <button class="element__like" type="button" aria-label="Like"></button>
                     </div>
                 </article>
     
@@ -41,7 +41,7 @@
                     <img class="element__image" src="./images/гора-эльбрус.png" alt="пейзаж  Гора-эльбрус">
                     <div class="element__footer">
                         <h2 class="element__place-travel"> Гора-эльбрус</h2>
-                        <button class="element__like element__like_active" type="reset" aria-label="Like"></button>
+                        <button class="element__like" type="button" aria-label="Like"></button>
                     </div>
                 </article>
                 
@@ -49,7 +49,7 @@
                     <img class="element__image" src="./images/домбай.png" alt="пейзаж Домбай">
                     <div class="element__footer">
                         <h2 class="element__place-travel"> Домбай</h2>
-                        <button class="element__like element__like_active" type="reset" aria-label="Like"></button>
+                        <button class="element__like" type="button" aria-label="Like"></button>
                     </div>
                 </article>
     
@@ -57,7 +57,7 @@
                     <img class="element__image" src="./images/Карачаевск.png" alt="пейзаж Карачаевск">
                     <div class="element__footer">
                         <h2 class="element__place-travel"> Карачаевск</h2>
-                        <button class="element__like element__like_active" type="reset" aria-label="Like"></button>
+                        <button class="element__like" type="button" aria-label="Like"></button>
                     </div>
                 </article>
     
@@ -65,7 +65,7 @@
                     <img class="element__image" src="./images/гора-эльбрус.png" alt="пейзаж Гора-эльбрус">
                     <div class="element__footer">
                         <h2 class="element__place-travel"> Гора-эльбрус</h2>
-                        <button class="element__like element__like_active" type="reset" aria-label="Like"></button>
+                        <button class="element__like" type="button" aria-label="Like"></button>
                     </div>
                 </article>
                 
@@ -73,7 +73,7 @@
                     <img class="element__image" src="./images/домбай.png" alt="пейзаж Домбай">
                     <div class="element__footer">
                         <h2 class="element__place-travel"> Домбай</h2>
-                        <button class="element__like element__like_active" type="reset" aria-label="Like"></button>
+                        <button class="element__like" type="button" aria-label="Like"></button>
                     </div>
                 </article>
             </section>
@@ -82,21 +82,15 @@
         </main>
     
         <footer class="footer">
-            <p class="footer__copywriter">	&#169; 2020 Mesto Russia</p>
+            <p class="footer__copywriter">	&copy; 2020 Mesto Russia</p>
         </footer>
         <div class="popup">
     
-            <form class="popup__container">
+            <form class="popup__container" method='GET' name='popup-container'>
                 <button class="popup__close" type="button"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
-
-                <div class="popup__field">
-                    <input  class="popup__input" id="name-input" type="text"  name="name" placeholder="Жак-Ив Кусто">
-                </div>
-                
-                <div class="popup__field popup-position">
-                    <input  class="popup__input" id="work-input" type="text" name="work" placeholder="Исследователь океана">
-                </div>
+                <input  class="popup__input" id="name-input" type="text"  name="name" placeholder="Имя">
+                <input  class="popup__input" id="work-input" type="text" name="work" placeholder="О себе">
                 <button type="submit" class="popup__save-btn">Сохранить</button>
             </form>
 

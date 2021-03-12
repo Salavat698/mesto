@@ -10,8 +10,10 @@
         margin: 0;
     }
 }
-@media screen and (max-width: 725px) {
+@media screen and (max-width: 400px) {
     .profile__info {
-        max-width: 100%;
+        max-width: 280px;
+        margin-left: 10px;
+        padding-left: 10px;
     }
 }

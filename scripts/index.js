@@ -10,6 +10,8 @@ let profileName = document.querySelector('.profile__name');// создал пе�
 let profileWork = document.querySelector('.profile__work');// создал переменную для тега с классомprofile__work
 
 function addPopup(){
+    nameInput.value = profileName.textContent;
+    workInput.value = profileWork.textContent;
     popup.classList.add('popup_active');
 }
 

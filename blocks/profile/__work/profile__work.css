@@ -10,6 +10,7 @@
     overflow: hidden;
     max-width: 336px;
 }
+
 @media screen and (max-width: 320px) {
     .profile__work{
         margin: auto;
