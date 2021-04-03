@@ -1,0 +1,12 @@
+.preview__img{
+    width: 75vw;
+    height: 75vh;
+    object-fit: cover;
+}
+@media (max-width:567px){
+    .preview__img{
+        right: 43px;
+        max-width: 240px;
+        max-height: 299px;
+    }
+}

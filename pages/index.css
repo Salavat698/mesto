@@ -19,9 +19,12 @@
 @import url(../blocks/elements/elements.css);
 /* block element */
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__header/element__header.css);
+@import url(../blocks/element/__backet/element__backet.css);
 @import url(../blocks/element/__footer/element__footer.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__like/element__like.css);
+@import url(../blocks/element/__like/_active/element__like_active.css);
 @import url(../blocks/element/__place-travel/element__place-travel.css);
 /* block  footer*/
 @import url(../blocks/footer/footer.css);
@@ -34,3 +37,10 @@
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/_active/popup_active.css);
+@import url(../blocks/popup/_preview/popup_preview.css);
+@import url(../blocks/popup/_container-preview/popup_container-preview.css);
+@import url(../blocks/popup/_close_preview/popup_close_preview.css);
+/* preview */
+@import url(../blocks/preview/preview.css);
+@import url(../blocks/preview/__img/preview__img.css);
+@import url(../blocks/preview/__signature/preview__signature.css);

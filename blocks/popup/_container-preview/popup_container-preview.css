@@ -1,0 +1,15 @@
+.popup_container-preview{
+    background-color: #000;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    margin:100px auto;
+};
+/* @media (max-width:567px){
+    .popup_container-preview{
+        margin: ;
+    }
+} */

@@ -4,8 +4,8 @@
     width: 22px;
     border: none;
     background-repeat: no-repeat;
-    background-color:#fff;
     align-self:center;
+    outline-style: none;
 }
 .element__like:hover{
     opacity: 0.5;

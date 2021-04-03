@@ -1,7 +1,7 @@
 .profile__icon{
     display: flex;
     align-self: center;
-    
+    outline-style: none;
 }
 @media screen and (max-width: 320px) {
     .profile__icon {

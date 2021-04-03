@@ -13,6 +13,7 @@
     background-image: url('../../../images/close-icon.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    outline-style: none;
 }
 .popup__close:hover{
     opacity: 0.6;

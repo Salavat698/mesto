@@ -1,0 +1,11 @@
+.element__backet{
+    height: 18px;
+    width: 19px;
+    background:none;
+    margin-top: 16px;
+    margin-left: -31px;
+}
+.element__backet:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
