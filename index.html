@@ -56,32 +56,43 @@
         <footer class="footer">
             <p class="footer__copywriter">	&copy; 2020 Mesto Russia</p>
         </footer>
+        
+        <div class="popup popup_profile">
+            <form class="popup__container popup__container_profile " method='POST' name='popup-container' novalidate autocomplete="off">
+                <button class="popup__close popup__close_profile " type="button"></button>
+                <h3 class="popup__title">Редактировать профиль</h3>
 
-        <div class="popup popup_add-cards">
+                <input id="name-input"  class="popup__input"  type="text"  name="name" placeholder="Имя" required minlength="2" maxlength="40">
+                <span  id="name-input--error" class="popup__input-error"></span>
 
-            <form class="popup__container popup__container_cards" method='POST' name='popup-container'>
-                <button class="popup__close popup__close-cards" type="button"></button>
-                <h3 class="popup__title">Новое место</h3>
-                <input  class="popup__input popup__input-description"   type="text"  placeholder="Название">
-                <input  class="popup__input popup__input-images"  type="images"  placeholder="Ссылка на картинку">
-                <button type="submit" class="popup__save-btn popup__save-btn-cards">Создать</button>
+                <input id="work-input"  class="popup__input "  type="text" name="work" placeholder="О себе" required minlength="2" maxlength="200">
+                <span  id="work-input--error" class="popup__input-error"></span>
+
+                <button type="submit" class="popup__save-btn popup__button_disabled">Сохранить</button>
             </form>
 
         </div>
 
-        <div class="popup popup_profile">
+        <div class="popup popup_add-cards">
 
-            <form class="popup__container popup__container_profile" method='POST' name='popup-container'>
-                <button class="popup__close popup__close_profile" type="button"></button>
-                <h3 class="popup__title">Редактировать профиль</h3>
-                <input  class="popup__input" id="name-input" type="text"  name="name" placeholder="Имя">
-                <input  class="popup__input" id="work-input" type="text" name="work" placeholder="О себе">
-                <button type="submit" class="popup__save-btn">Сохранить</button>
+            <form class="popup__container popup__container_cards" action="#" method='POST' name='popup-container'  autocomplete="off">
+                <button class="popup__close popup__close-cards" type="button"></button>
+                <h3 class="popup__title">Новое место</h3>
+
+                <input id="description-card"  class="popup__input popup__input-description "    type="text"  placeholder="Название" required>
+                <span id="description-card--error" class="popup__input-error" ></span>
+
+                <input  class="popup__input popup__input-images" id="url-card"   type="url"  placeholder="Ссылка на картинку" required>
+                <span  id="url-card--error" class="popup__input-error"></span>
+
+                <button type="submit" class="popup__save-btn popup__save-btn-cards popup__button_disabled">Создать</button>
+
             </form>
 
         </div>
 
         <div class="popup popup_preview">
+            
             <form class="popup__container-preview" method='POST' name='popup-container'>
                 <button class="popup__close popup__close_preview" type="button"></button>
                 <figure class="preview">
@@ -104,8 +115,12 @@
               </div>
             </div>
         </template>
+
+    <script src="scripts/validate.js"></script>
     <script src="scripts/initial-сards.js"></script>
     <script src="scripts/index.js"></script>
+    
+    
     
 </body>
 </html>

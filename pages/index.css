@@ -40,6 +40,12 @@
 @import url(../blocks/popup/_preview/popup_preview.css);
 @import url(../blocks/popup/__container-preview/popup__container-preview.css);
 @import url(../blocks/popup/__close_preview/popup__close_preview.css);
+@import url(../blocks/popup/__input/_type_error/popup__input_type_error.css);
+@import url(../blocks/popup/__input-error/popup__input-error.css);
+@import url(../blocks/popup/__input-error/__input-error_active/popup__input-error_active.css);
+@import url(../blocks/popup/__button_disabled/popup__button_disabled.css);
+/* error */
+
 /* preview */
 @import url(../blocks/preview/preview.css);
 @import url(../blocks/preview/__img/preview__img.css);

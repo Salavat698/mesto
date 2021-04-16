@@ -16,12 +16,47 @@ const formElementCards = document.querySelector('.popup__container_cards'); //с
 const cardsContainer = document.querySelector('.element'); //контейнер где будут лежат все карточки
 const cardTemplate = document.querySelector('#card-template').content;// беру сам темплейт 
 
+
+const popupProfile = document.querySelector('.popup_profile');
+//закрытие оверлей
+const creatPopap = document.querySelectorAll('.popup')
+
+function closeOwer(popupAll){
+  popupAll.forEach(itemPopup =>{
+    itemPopup.addEventListener('click',(e)=>{
+      if(e.target === e.currentTarget){
+        closePopup(itemPopup)
+      };
+     
+    });
+    itemPopup.addEventListener('keydown',(e)=>{
+      if(e.keyCode === "Escape"){
+        closePopup(itemPopup)
+      };
+    });
+  });
+};
+closeOwer(creatPopap);
+
+document.addEventListener('keydown', function(event) {
+  const key = event.key;
+  if (key === "Escape") {
+    closePopup(popupPreviewBox);
+    closePopup(popupProfile);
+    closePopup(popupAddCards);
+  }
+});
+
+
+
+
 function openPopup(popup){
   popup.classList.add('popup_active');
 };
 
 function closePopup(popup){
   popup.classList.remove('popup_active');
+  
 };
 
 
@@ -29,6 +64,7 @@ function addPopup(){
     nameInput.value = profileName.textContent;
     workInput.value = profileWork.textContent;
     openPopup(popupEditProfile);
+    
 }
 
 
@@ -102,8 +138,9 @@ function formSubmitCards(evt) {
   
   cardsContainer.prepend(cardElement);
   formElementCards.reset();
-  closePopup(popupAddCards);
   
+  closePopup(popupAddCards);
+
 }
 
 //обработчики событий
@@ -111,6 +148,7 @@ popupClosePreview.addEventListener('click',function(){
   closePopup(popupPreviewBox);
 });
 formElementCards.addEventListener('submit',formSubmitCards);
+
 profileAddBtn.addEventListener('click',function(){
   openPopup(popupAddCards);
 });
