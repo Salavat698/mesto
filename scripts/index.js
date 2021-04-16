@@ -23,31 +23,32 @@ const creatPopap = document.querySelectorAll('.popup')
 
 function closeOwer(popupAll){
   popupAll.forEach(itemPopup =>{
+    //закрываю по оверу
     itemPopup.addEventListener('click',(e)=>{
       if(e.target === e.currentTarget){
         closePopup(itemPopup)
       };
-     
     });
-    itemPopup.addEventListener('keydown',(e)=>{
-      if(e.keyCode === "Escape"){
-        closePopup(itemPopup)
-      };
+    //закрываю по esc
+    document.addEventListener('keydown', function(event) {
+      const key = event.key;
+      if (key === "Escape") {
+        closePopup(itemPopup);
+      }
     });
   });
 };
+
 closeOwer(creatPopap);
 
-document.addEventListener('keydown', function(event) {
-  const key = event.key;
-  if (key === "Escape") {
-    closePopup(popupPreviewBox);
-    closePopup(popupProfile);
-    closePopup(popupAddCards);
-  }
-});
-
-
+// document.addEventListener('keydown', function(event) {
+//   const key = event.key;
+//   if (key === "Escape") {
+//     closePopup(popupPreviewBox);
+//     closePopup(popupProfile);
+//     closePopup(popupAddCards);
+//   }
+// });
 
 
 function openPopup(popup){

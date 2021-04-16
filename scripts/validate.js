@@ -1,6 +1,5 @@
 function showInputError(formElement, input, vConfig) {
     const errorElement = formElement.querySelector(`#${input.id}--error`);
-    console.log(errorElement)
     input.classList.add(vConfig.inputErrorClass);
     errorElement.textContent = input.validationMessage;
     errorElement.classList.add(vConfig.errorClass);
@@ -58,7 +57,7 @@ function enableValidation(vConfig) {
 
 //отмена стандартсной формы отправки
 function preventFormSubmit(e) {
-    e.prevetnDefault();
+    e.preventDefault();
   }
 
 
