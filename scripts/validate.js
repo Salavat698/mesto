@@ -11,13 +11,7 @@ function hideInputError(formElement, input, vConfig) {
     errorElement.textContent = '';
     errorElement.classList.remove(vConfig.errorClass);
 }
-// очищение формы при открытие
-const resetFormState = (formElement, vConfig) => {
-  const inputList = Array.from(formElement.querySelectorAll(vConfig.inputSelector));
-  inputList.forEach(inputElement => {
-      hideInputError(formElement, inputElement, vConfig);
-  })
-}
+
 
 function validateInput(formElement, input, vConfig) {
   

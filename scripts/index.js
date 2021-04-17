@@ -55,6 +55,13 @@ function isEscEvt(e, action) {
   }
 }
 
+// очищение формы при открытие
+const resetFormState = (formElement, vConfig) => {
+  const inputList = Array.from(formElement.querySelectorAll(vConfig.inputSelector));
+  inputList.forEach(inputElement => {
+      hideInputError(formElement, inputElement, vConfig);
+  })
+}
 
 function openPopup(popup){
   popup.classList.add('popup_active');
