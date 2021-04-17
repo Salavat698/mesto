@@ -39,9 +39,30 @@ function closeOwer(allPopap){
   });
 };
 
+const vConfig = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-btn',
+  inactiveButtonClass: 'popup__save-btn_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error'
+};
+
+// function errorNull (vConfig,popup){
+//   const spanALL = Array.from(popup.querySelectorAll(vConfig.inputSelector))
+//   spanALL.forEach(spanItem =>{
+//     console.log(spanItem)
+//     spanItem.classList.remove('popup__input-error');
+//   })
+  
+// }
+
 function openPopup(popup){
   popup.classList.add('popup_active');
   closeOwer(allPopap);
+  // errorNull(vConfig,popup)
+  resetFormState(popup,vConfig)
+
 };
 function closePopup(popup){
   popup.classList.remove('popup_active');

@@ -11,6 +11,13 @@ function hideInputError(formElement, input, vConfig) {
     errorElement.textContent = '';
     errorElement.classList.remove(vConfig.errorClass);
 }
+// очищение формы при открытие
+const resetFormState = (formElement, vConfig) => {
+  const inputList = Array.from(formElement.querySelectorAll(vConfig.inputSelector));
+  inputList.forEach(inputElement => {
+      hideInputError(formElement, inputElement, vConfig);
+  })
+}
 
 function validateInput(formElement, input, vConfig) {
   
@@ -67,5 +74,5 @@ enableValidation({
     submitButtonSelector: '.popup__save-btn',
     inactiveButtonClass: 'popup__save-btn_disabled',
     inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error'//
+    errorClass: 'popup__input-error'
   });
