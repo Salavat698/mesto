@@ -29,7 +29,7 @@ function closeOwer(popupAll){
         closePopup(itemPopup)
       };
     });
-    //закрываю по esc
+    // закрываю по esc
     document.addEventListener('keydown', function(event) {
       const key = event.key;
       if (key === "Escape") {
@@ -41,15 +41,6 @@ function closeOwer(popupAll){
 
 closeOwer(creatPopap);
 
-// document.addEventListener('keydown', function(event) {
-//   const key = event.key;
-//   if (key === "Escape") {
-//     closePopup(popupPreviewBox);
-//     closePopup(popupProfile);
-//     closePopup(popupAddCards);
-//   }
-// });
-
 
 function openPopup(popup){
   popup.classList.add('popup_active');
@@ -57,7 +48,7 @@ function openPopup(popup){
 
 function closePopup(popup){
   popup.classList.remove('popup_active');
-  
+  document.removeEventListener("keydown",closeOwer);
 };
 
 
