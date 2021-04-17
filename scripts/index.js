@@ -15,7 +15,14 @@ const popupSaveBtnCards = document.querySelector('.popup__save-btn-cards');//к�
 const formElementCards = document.querySelector('.popup__container_cards'); //сама форма попап
 const cardsContainer = document.querySelector('.element'); //контейнер где будут лежат все карточки
 const cardTemplate = document.querySelector('#card-template').content;// беру сам темплейт 
-
+const vConfig = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-btn',
+  inactiveButtonClass: 'popup__save-btn_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error'
+};
 
 const popupProfile = document.querySelector('.popup_profile');
 //закрытие оверлей
@@ -29,44 +36,36 @@ function closeOwer(allPopap){
         closePopup(itemPopup)
       };
     });
-    // закрываю по esc
-    document.addEventListener('keydown', function(event) {
-      const key = event.key;
-      if (key === "Escape") {
-        closePopup(itemPopup);
-      }
-    });
   });
 };
+//слушатель на документ
+function enableEscListener() {
+  document.addEventListener('keyup', handleEscListener);
+}
+// определяем что это нужное событие
+function handleEscListener (e) {
+  e.preventDefault();
+  isEscEvt(e, closePopup);
+}
+//при нужном событии активный попап передается в функцию закрытия попапа
+function isEscEvt(e, action) {
+  if (e.key === 'Escape') {
+  const popupActiv = document.querySelector('.popup_active');
+  action(popupActiv);
+  }
+}
 
-const vConfig = {
-  formSelector: '.popup__container',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-btn',
-  inactiveButtonClass: 'popup__save-btn_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error'
-};
-
-// function errorNull (vConfig,popup){
-//   const spanALL = Array.from(popup.querySelectorAll(vConfig.inputSelector))
-//   spanALL.forEach(spanItem =>{
-//     console.log(spanItem)
-//     spanItem.classList.remove('popup__input-error');
-//   })
-  
-// }
 
 function openPopup(popup){
   popup.classList.add('popup_active');
   closeOwer(allPopap);
-  // errorNull(vConfig,popup)
   resetFormState(popup,vConfig)
+  enableEscListener()
 
 };
 function closePopup(popup){
   popup.classList.remove('popup_active');
-  document.removeEventListener("keydown",closeOwer);
+  document.removeEventListener('keyup', handleEscListener);
 };
 
 
