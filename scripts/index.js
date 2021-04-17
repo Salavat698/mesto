@@ -19,10 +19,10 @@ const cardTemplate = document.querySelector('#card-template').content;// бер�
 
 const popupProfile = document.querySelector('.popup_profile');
 //закрытие оверлей
-const creatPopap = document.querySelectorAll('.popup')
+const allPopap = document.querySelectorAll('.popup')
 
-function closeOwer(popupAll){
-  popupAll.forEach(itemPopup =>{
+function closeOwer(allPopap){
+  allPopap.forEach(itemPopup =>{
     //закрываю по оверу
     itemPopup.addEventListener('click',(e)=>{
       if(e.target === e.currentTarget){
@@ -39,13 +39,10 @@ function closeOwer(popupAll){
   });
 };
 
-closeOwer(creatPopap);
-
-
 function openPopup(popup){
   popup.classList.add('popup_active');
+  closeOwer(allPopap);
 };
-
 function closePopup(popup){
   popup.classList.remove('popup_active');
   document.removeEventListener("keydown",closeOwer);
