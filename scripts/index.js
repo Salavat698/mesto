@@ -23,6 +23,8 @@ const vConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error'
 };
+
+const popupProfile = document.querySelector('.popup_profile');
 //закрытие оверлей
 const allPopaps = document.querySelectorAll('.popup')
 
@@ -46,11 +48,30 @@ function handleEscListener (e) {
   e.preventDefault();
   isEscEvt(e, closePopup);
 }
+//при нужном событии активный попап передается в функцию закрытия попапа
+function isEscEvt(e, action) {
+  if (e.key === 'Escape') {
+  const popupActiv = document.querySelector('.popup_active');
+  action(popupActiv);
+  }
+}
+// очищение формы при открытие
+const resetFormState = (formElement, vConfig) => {
+  const inputList = Array.from(formElement.querySelectorAll(vConfig.inputSelector));
+  inputList.forEach(inputElement => {
+      hideInputError(formElement, inputElement, vConfig);
+  })
+   
+  const activeBtnPopup = formElement.querySelector(".popup__save-btn");
+  activeBtnPopup.classList.add(vConfig.inactiveButtonClass);
+  activeBtnPopup.disabled = true;
+}
 
 
 
 function openPopup(popup){
   popup.classList.add('popup_active');
+  resetFormState(popup,vConfig)
   enableEscListener()
 
 };
@@ -138,7 +159,7 @@ function formSubmitCards(evt) {
   
   cardsContainer.prepend(cardElement);
   formElementCards.reset();
- 
+  
   closePopup(popupAddCards);
 
 }
@@ -151,19 +172,14 @@ formElementCards.addEventListener('submit',formSubmitCards);
 
 profileAddBtn.addEventListener('click',function(){
   openPopup(popupAddCards);
-  
 });
 popupCloseCards.addEventListener('click',function(){
-  closePopup(popupAddCards);
+  closePopup(popupAddCards); 
 });
 formElement.addEventListener('submit', formSubmitHandler);
-
-profileEditBtn.addEventListener('click', function(){
-  addPopup();
-  resetFormState(popup,vConfig)
-  
-});
-
+profileEditBtn.addEventListener('click', addPopup);
 popupCloseProfile.addEventListener('click', function(e){
   closePopup(popupEditProfile);
 });
+
+
