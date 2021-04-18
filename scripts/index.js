@@ -23,10 +23,8 @@ const vConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error'
 };
-
-const popupProfile = document.querySelector('.popup_profile');
 //закрытие оверлей
-const allPopap = document.querySelectorAll('.popup')
+const allPopaps = document.querySelectorAll('.popup')
 
 function closeOwer(allPopap){
   allPopap.forEach(itemPopup =>{
@@ -38,6 +36,7 @@ function closeOwer(allPopap){
     });
   });
 };
+closeOwer(allPopaps);
 //слушатель на документ
 function enableEscListener() {
   document.addEventListener('keyup', handleEscListener);
@@ -47,26 +46,11 @@ function handleEscListener (e) {
   e.preventDefault();
   isEscEvt(e, closePopup);
 }
-//при нужном событии активный попап передается в функцию закрытия попапа
-function isEscEvt(e, action) {
-  if (e.key === 'Escape') {
-  const popupActiv = document.querySelector('.popup_active');
-  action(popupActiv);
-  }
-}
 
-// очищение формы при открытие
-const resetFormState = (formElement, vConfig) => {
-  const inputList = Array.from(formElement.querySelectorAll(vConfig.inputSelector));
-  inputList.forEach(inputElement => {
-      hideInputError(formElement, inputElement, vConfig);
-  })
-}
+
 
 function openPopup(popup){
   popup.classList.add('popup_active');
-  closeOwer(allPopap);
-  resetFormState(popup,vConfig)
   enableEscListener()
 
 };
@@ -154,7 +138,7 @@ function formSubmitCards(evt) {
   
   cardsContainer.prepend(cardElement);
   formElementCards.reset();
-  
+ 
   closePopup(popupAddCards);
 
 }
@@ -167,12 +151,19 @@ formElementCards.addEventListener('submit',formSubmitCards);
 
 profileAddBtn.addEventListener('click',function(){
   openPopup(popupAddCards);
+  
 });
 popupCloseCards.addEventListener('click',function(){
   closePopup(popupAddCards);
 });
 formElement.addEventListener('submit', formSubmitHandler);
-profileEditBtn.addEventListener('click', addPopup);
+
+profileEditBtn.addEventListener('click', function(){
+  addPopup();
+  resetFormState(popup,vConfig)
+  
+});
+
 popupCloseProfile.addEventListener('click', function(e){
   closePopup(popupEditProfile);
 });
