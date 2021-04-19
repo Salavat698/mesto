@@ -61,10 +61,19 @@ const resetFormState = (formElement, vConfig) => {
   inputList.forEach(inputElement => {
       hideInputError(formElement, inputElement, vConfig);
   })
-   
-  const activeBtnPopup = formElement.querySelector(".popup__save-btn");
-  activeBtnPopup.classList.add(vConfig.inactiveButtonClass);
-  activeBtnPopup.disabled = true;
+  
+  // ОБРАТИТЕ ВНИМАНИЕ !!!
+  //ВЫ указали --> (из комментарий) "тут еще нужно деактивировать кнопку сабмита"
+  //Что я и сделал ,но потом заметил ошибку по 3 попап !
+  //Если указать деактивирование  в resetFormState то он на вход берет 3 попапа.
+  // и так как у нас нету элемента button в preview(это 3 попап) то он не сможет его отработать!
+  // и нашел решение в 188 строке ! P.S Очень надеюсь Вас он удовлетворить =)...
+
+
+  //САМ КОД (который оказался не валидный) : 
+  // const activeBtnPopup = formElement.querySelector(".popup__save-btn");
+  // activeBtnPopup.classList.add(vConfig.inactiveButtonClass);
+  // activeBtnPopup.disabled = true;
 }
 
 
@@ -172,6 +181,11 @@ formElementCards.addEventListener('submit',formSubmitCards);
 
 profileAddBtn.addEventListener('click',function(){
   openPopup(popupAddCards);
+
+  // Проверяю состояние кнопки с вызовом функций toggleButtonState 
+  const button = popupAddCards.querySelector(vConfig.submitButtonSelector);
+  const inputs = Array.from(popupAddCards.querySelectorAll(vConfig.inputSelector));
+  toggleButtonState(button, vConfig, inputs);
 });
 popupCloseCards.addEventListener('click',function(){
   closePopup(popupAddCards); 
