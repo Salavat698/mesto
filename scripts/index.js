@@ -68,19 +68,24 @@ const resetFormState = (formElement, vConfig) => {
   //Если указать деактивирование  в resetFormState то он на вход берет 3 попапа.
   // и так как у нас нету элемента button в preview(это 3 попап) то он не сможет его отработать!
   // и нашел решение в 188 строке ! P.S Очень надеюсь Вас он удовлетворить =)...
-
-
   //САМ КОД (который оказался не валидный) : 
-  // const activeBtnPopup = formElement.querySelector(".popup__save-btn");
-  // activeBtnPopup.classList.add(vConfig.inactiveButtonClass);
-  // activeBtnPopup.disabled = true;
+
+
+
+
+  //ЗДЕСЬ ТОГДА ВЕРНУЛ
+
+  // состояние дизабл кнопки
+  const activeBtnPopup = formElement.querySelector(".popup__save-btn");
+  activeBtnPopup.classList.add(vConfig.inactiveButtonClass);
+  activeBtnPopup.disabled = true;
 }
 
 
-
+//универсальная функц открытия
 function openPopup(popup){
   popup.classList.add('popup_active');
-  resetFormState(popup,vConfig)
+  
   enableEscListener()
 
 };
@@ -89,13 +94,15 @@ function closePopup(popup){
   document.removeEventListener('keyup', handleEscListener);
 };
 
-
-function addPopup(){
-    nameInput.value = profileName.textContent;
-    workInput.value = profileWork.textContent;
-    openPopup(popupEditProfile);
+// это не универсальная функц открывание а отдельная для копирование строк при открытий! 
+//Мне до этого ментор так сказал сделать и КРчикИ не чего не сказал (до этого)!
+//Типо каждое действия отдельная функция
+// function addPopup(){
+//     nameInput.value = profileName.textContent;
+//     workInput.value = profileWork.textContent;
+//     openPopup(popupEditProfile);
     
-}
+// }
 
 
 function formSubmitHandler (evt) {
@@ -181,17 +188,29 @@ formElementCards.addEventListener('submit',formSubmitCards);
 
 profileAddBtn.addEventListener('click',function(){
   openPopup(popupAddCards);
+  resetFormState(popupAddCards,vConfig)
 
+  // Я ЗДЕСЬ УБРАЛ ДЛЯ ЧИТАБИЛЬНОСТИ
   // Проверяю состояние кнопки с вызовом функций toggleButtonState 
-  const button = popupAddCards.querySelector(vConfig.submitButtonSelector);
-  const inputs = Array.from(popupAddCards.querySelectorAll(vConfig.inputSelector));
-  toggleButtonState(button, vConfig, inputs);
+  // const button = popupAddCards.querySelector(vConfig.submitButtonSelector);
+  // const inputs = Array.from(popupAddCards.querySelectorAll(vConfig.inputSelector));
+  // toggleButtonState(button, vConfig, inputs);
 });
 popupCloseCards.addEventListener('click',function(){
   closePopup(popupAddCards); 
 });
-formElement.addEventListener('submit', formSubmitHandler);
-profileEditBtn.addEventListener('click', addPopup);
+formElement.addEventListener('submit', function(e){
+  formSubmitHandler(e);
+  
+});
+profileEditBtn.addEventListener('click', function(){
+  // addPopup();
+  nameInput.value = profileName.textContent;
+  workInput.value = profileWork.textContent;
+  openPopup(popupEditProfile);
+  resetFormState(popupEditProfile,vConfig)
+});
+
 popupCloseProfile.addEventListener('click', function(e){
   closePopup(popupEditProfile);
 });
