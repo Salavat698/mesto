@@ -1,7 +1,8 @@
 import {Card} from './Card.js';
 import {initialCards} from './initial-сards.js';
 import {FormValidate} from './FormValidate.js';
-import{enableEscListener,openPopup,handleEscListener,isEscEvt,closePopup} from './utils/utils.js';
+import{openPopup,closePopup} from './utils/utils.js';
+
 
 const profileEditBtn = document.querySelector('.profile__edit-btn');//кнопка редаетирование
 const popupEditProfile = document.querySelector('.popup_profile');//сам блок попап
@@ -51,8 +52,8 @@ profileEditBtn.addEventListener('click', function(){
 
 
 // закрывает по оверулей клик
-function closeBeOverlayClick(allPopap){
-  allPopap.forEach(itemPopup =>{
+function closeByOverlayClick(popups){
+  popups.forEach(itemPopup =>{
     //закрываю по оверу
     itemPopup.addEventListener('click',(e)=>{
       if(e.target === e.currentTarget){
@@ -61,24 +62,36 @@ function closeBeOverlayClick(allPopap){
     });
   });
 };
-closeBeOverlayClick(popups);
-
-
-//закртыие по esc
-enableEscListener();
+closeByOverlayClick(popups);
 
 
 //массив добавляем в контейнер
 initialCards.forEach(function (initialCard) {
-  const cardElement = new Card(initialCard,'#card-template');
-  cardsContainer.append(cardElement.getElement());
+  const name = initialCard.name;
+  const link = initialCard.link;
+
+  cardsContainer.append(createCard({name,link}));
+
 });
 
 
+//функция создание карточки
+function createCard ({name,link}){
+  const cardElement = new Card({name,link},'#card-template');
+ 
+  return cardElement.getElement();
+}
 
-function createCard (){
-  const cardElement = new Card({ name: inputName.value, link: inputDescription.value },'#card-template');
-  cardsContainer.prepend(cardElement.getElement());
+
+//ДОБАВЛЕНИЕ КАРТОЧКИ в основной контейнер
+function formAddCardSubmitHandler(evt) {
+  evt.preventDefault();
+
+
+  cardsContainer.prepend(createCard({name:inputName.value},{link:inputDescription.value}));
+
+  formElementCards.reset();
+  closePopup(popupAddCards);
 }
 
 function formEditProfileSubmitHandler (evt) {
@@ -87,20 +100,12 @@ function formEditProfileSubmitHandler (evt) {
   profileWork.textContent = workInput.value; 
   closePopup(popupEditProfile);
 }
-//ДОБАВЛЕНИЕ КАРТОЧКИ в основной контейнер
-function formAddCardSubmitHandler(evt) {
-  evt.preventDefault();
-  createCard();
-  formElementCards.reset();
-  closePopup(popupAddCards);
-}
 
 //обработчики событий
 popupClosePreview.addEventListener('click',function(){
   closePopup(popupPreviewBox);
 });
 formElementCards.addEventListener('submit',formAddCardSubmitHandler);
-
 
 popupCloseCards.addEventListener('click',function(){
   closePopup(popupAddCards);
