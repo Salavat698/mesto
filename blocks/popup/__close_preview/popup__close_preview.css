@@ -3,3 +3,9 @@
     top: -47px;
     right: -25px;
 }
+@media screen and (max-width: 320px) {
+    .popup__close_preview {
+        right: -9px;
+        top: -50px;
+    }
+}
