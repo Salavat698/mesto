@@ -29,7 +29,7 @@ const  validationConfig= {
   submitButtonSelector: '.popup__save-btn',
   inactiveButtonClass: 'popup__save-btn_disabled',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error'
+  errorClass: 'popup__input--error'
 };
 const validatorEditProfile = new FormValidate(validationConfig,formElementCards);
 validatorEditProfile.enableValidation();//запуск валидаций профиля
@@ -78,7 +78,6 @@ initialCards.forEach(function (initialCard) {
 //функция создание карточки
 function createCard ({name,link}){
   const cardElement = new Card({name,link},'#card-template');
- 
   return cardElement.getElement();
 }
 
@@ -86,13 +85,14 @@ function createCard ({name,link}){
 //ДОБАВЛЕНИЕ КАРТОЧКИ в основной контейнер
 function formAddCardSubmitHandler(evt) {
   evt.preventDefault();
-
-
-  cardsContainer.prepend(createCard({name:inputName.value},{link:inputDescription.value}));
-
+  cardsContainer.prepend(createCard({name:inputName.value,link:inputDescription.value}));
   formElementCards.reset();
   closePopup(popupAddCards);
 }
+//отправка формы для карточек
+formElementCards.addEventListener('submit',formAddCardSubmitHandler);
+
+
 
 function formEditProfileSubmitHandler (evt) {
   evt.preventDefault();
@@ -100,21 +100,24 @@ function formEditProfileSubmitHandler (evt) {
   profileWork.textContent = workInput.value; 
   closePopup(popupEditProfile);
 }
+//отправка формы професиий
+formElement.addEventListener('submit', function(e){
+  formEditProfileSubmitHandler(e);
+});
+
+
+
 
 //обработчики событий
 popupClosePreview.addEventListener('click',function(){
   closePopup(popupPreviewBox);
 });
-formElementCards.addEventListener('submit',formAddCardSubmitHandler);
 
 popupCloseCards.addEventListener('click',function(){
   closePopup(popupAddCards);
   formElementCards.reset();
 });
-formElement.addEventListener('submit', function(e){
-  formEditProfileSubmitHandler(e);
-  
-});
+
 
 popupCloseProfile.addEventListener('click', function(e){
   closePopup(popupEditProfile);

@@ -7,7 +7,7 @@ export class FormValidate{
     const errorElement = this.form.querySelector(`#${input.id}--error`);
     input.classList.add(this.validationConfig.inputErrorClass);
     errorElement.textContent = input.validationMessage;
-    errorElement.classList.add(this.vConfig.errorClass);
+    errorElement.classList.add(this.validationConfig.errorClass);
   }
 
   _hideInputError(input){

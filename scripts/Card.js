@@ -10,11 +10,25 @@ export class Card{
         this.cardData = cardData;
         this.cardTemplateId = cardTemplateId;
 
-
         this.cardElement = this._makeCard();
         this._makeEventListeners();
         this.elementLike = this.cardElement.querySelector(".element__like");
         this.itemElementCard =this.cardElement.querySelector('.directors__item');
+
+    }
+   
+    _makeCard(){
+        const cardTemplate = document.querySelector(this.cardTemplateId).content;
+        const cardElement = cardTemplate.cloneNode(true);
+        const image = cardElement.querySelector('.element__image');
+        const title = cardElement.querySelector(".element__place-travel");
+        
+        image.src = this.cardData.link;
+        image.alt = this.cardData.name;
+        title.textContent = this.cardData.name;
+
+        return cardElement;
+
     }
     _openImagePopup(){
         
@@ -41,21 +55,6 @@ export class Card{
         basketIconDelet.addEventListener("click", () => this._deleteCard());
         previewImg.addEventListener("click", () => this._openImagePopup());
     }
- 
-    _makeCard(){
-        const cardTemplate = document.querySelector(this.cardTemplateId).content;
-        const cardElement = cardTemplate.cloneNode(true);
-        const image = cardElement.querySelector('.element__image');
-        const title = cardElement.querySelector(".element__place-travel");
-        
-        image.src = this.cardData.link;
-        image.alt = this.cardData.name;
-        title.textContent = this.cardData.name;
-
-        return cardElement;
-
-    }
-  
 
     getElement(){
         return this.cardElement;
