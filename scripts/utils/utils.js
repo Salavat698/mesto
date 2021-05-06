@@ -9,6 +9,7 @@ function enableEscListener() {
 function handleEscListener (e) {
   e.preventDefault();
   isEscEvt(e, closePopup);
+  
 }
 function openPopup(popup){
     popup.classList.add('popup_active');
@@ -19,6 +20,8 @@ function openPopup(popup){
   if (e.key === 'Escape') {
   const popupActiv = document.querySelector('.popup_active');
   action(popupActiv);
+  const formElementCards = document.querySelector('.popup__container_cards'); //сама форма попап
+  formElementCards.reset();
   }
 }
 function closePopup(popup){

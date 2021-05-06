@@ -58,8 +58,10 @@ function closeByOverlayClick(popups){
     itemPopup.addEventListener('click',(e)=>{
       if(e.target === e.currentTarget){
         closePopup(itemPopup)
+        formElementCards.reset();
       };
     });
+    
   });
 };
 closeByOverlayClick(popups);
@@ -114,8 +116,9 @@ popupClosePreview.addEventListener('click',function(){
 });
 
 popupCloseCards.addEventListener('click',function(){
-  closePopup(popupAddCards);
+  
   formElementCards.reset();
+  closePopup(popupAddCards);
 });
 
 
