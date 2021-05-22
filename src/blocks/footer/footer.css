@@ -4,6 +4,12 @@
     background-color:  #000000;
     margin: 0 auto;
     padding: 67px 0 60px;
+
+}
+@media screen and (max-width: 873px) {
+    .footer{
+        margin-left: 50px;
+    }
 }
 @media screen and (max-width: 320px) {
     .footer{

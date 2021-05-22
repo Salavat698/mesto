@@ -1,15 +1,11 @@
-import{openPopup} from './utils/utils.js';
-
-const popupPreviewBox = document.querySelector('.popup_preview');
-const previewSignature = document.querySelector('.preview__signature');
-const previewImgPopup = document.querySelector('.preview__img');
+import{openPopup} from '../utils/utils.js';
 
 export class Card{
 
-    constructor(cardData,cardTemplateId){
+    constructor(cardData,cardTemplateId,handleCardClick){
         this.cardData = cardData;
         this.cardTemplateId = cardTemplateId;
-
+        this._handleCardClick = handleCardClick;
         this.cardElement = this._makeCard();
         this._makeEventListeners();
         this.elementLike = this.cardElement.querySelector(".element__like");
@@ -31,11 +27,8 @@ export class Card{
 
     }
     _openImagePopup(){
-        
-        openPopup(popupPreviewBox);
-        previewImgPopup.src = this.cardData.link;
-        previewImgPopup.alt = this.cardData.name;
-        previewSignature.textContent = this.cardData.name;
+        this._handleCardClick(this.cardData);
+
     }
 
     _like(){
