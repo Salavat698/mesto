@@ -82,12 +82,12 @@ function handleCardClick (data) {
 }
 
 //экземпляр карточек
-const PopupFormCards = new PopupWithForm('.popup_add-cards', formAddCardSubmitHandler);
-PopupFormCards.setEventListeners();
+const popupFormCards = new PopupWithForm('.popup_add-cards', formAddCardSubmitHandler);
+popupFormCards.setEventListeners();
 
 // // открывание карточек
 profileAddBtn.addEventListener('click',function(){
-  PopupFormCards.open();
+  popupFormCards.open();
   validatorEditProfile.resetFormState()//очищение формы при открытий
 });
 
@@ -97,8 +97,8 @@ profileAddBtn.addEventListener('click',function(){
 const userInfoProfile = new UserInfo({name:'.profile__name', commit:'.profile__work'});
 
 // //экземпляр формы
-const PopupFormProfile = new PopupWithForm('.popup_profile', editFormSumbutHadler);
-PopupFormProfile.setEventListeners();
+const popupFormProfile = new PopupWithForm('.popup_profile', editFormSumbutHadler);
+popupFormProfile.setEventListeners();
 
 // функция которую буду опрокидывать в PopupFormProfile
 function editFormSumbutHadler(data){
@@ -106,25 +106,10 @@ function editFormSumbutHadler(data){
 }
 //открывание профиле
 profileEditBtn.addEventListener('click', function(){
-  PopupFormProfile.open();
+  popupFormProfile.open();
   userInfoProfile.getUserInfo()
   validatorAddCard.resetFormState()//очищение формы при открытий
 });
 
-
-//обработчики событий при ЗАКРЫТИЙ ПОПАПОВ
-popupClosePreview.addEventListener('click',function(){
-  closePopup(popupPreviewBox);
-});
-
-popupCloseCards.addEventListener('click',function(){
-  closePopup(popupAddCards);
-  formElementCards.reset();
-});
-
-
-popupCloseProfile.addEventListener('click', function(e){
-  closePopup(popupEditProfile);
-});
 
 

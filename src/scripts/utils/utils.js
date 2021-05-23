@@ -9,6 +9,7 @@ function enableEscListener() {
 function handleEscListener (e) {
   e.preventDefault();
   isEscEvt(e, closePopup);
+  
 }
 // открыть попап
 function openPopup(popup){
@@ -20,6 +21,8 @@ function openPopup(popup){
   if (e.key === 'Escape') {
   const popupActiv = document.querySelector('.popup_active');
   action(popupActiv);
+  const formElementCards = document.querySelector('.popup__container_cards'); //сама форма попап
+  formElementCards.reset();
   }
 }
 //закрытие попап
