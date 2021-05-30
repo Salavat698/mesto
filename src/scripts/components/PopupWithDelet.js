@@ -1,6 +1,6 @@
 import Popup from './Popup.js'
 
- export default class PopupWithDelet extends Popup {
+ export default class PopupWithConfig extends Popup {
   constructor(popupSelector,onSumbit) {
     super(popupSelector)
     this.onSumbit = onSumbit
