@@ -1,18 +1,13 @@
 export default class Section {
-    //передаем массив карточек, функцию, и селектор секци
-    constructor({data, rendererItem}, containerSelector) {
-      this.data = data;
-      this.rendererItem = rendererItem
-      this.container = document.querySelector(containerSelector);
+    constructor({ items, renderer }, containerSelector) {
+        this._itemsArr = items;
+        this._renderer = renderer;
+        this._containerSection = document.querySelector(containerSelector);
     }
-  // метод обходит карточки и вызывает метод добавления в разметку
-    renderer() {
-      this.data.reverse().forEach( data => {
-        this.addItem(this.rendererItem(data))
-      });
+    render() {
+        this._itemsArr.reverse().forEach( item => this._renderer(item))
     }
-  
-    addItem(element) {
-      this.container.prepend(element);
+    addItem(item) {
+        this._containerSection.prepend(item);
     }
-  }
+}

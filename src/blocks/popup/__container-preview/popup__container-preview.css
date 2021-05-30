@@ -8,9 +8,3 @@
     flex-direction: column;
     margin:100px auto;
 }
-@media (max-width:567px){
-    .popup__container-preview{
-        max-width: 240px;
-        max-height: 299px;
-    }
-}
