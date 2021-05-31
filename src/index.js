@@ -4,7 +4,7 @@ import{closePopup} from './scripts/utils/utils.js';
 import Section from './scripts/components/Section.js';
 import PopupWithForm from './scripts/components/PopupWithForm.js';
 import PopupWithImage from './scripts/components/PopupWithImage.js';
-import PopupWithDelet from './scripts/components/PopupWithDelet.js';
+import PopupWithDelet from './scripts/components/PopupWithConfirm.js';
 import UserInfo from './scripts/components/UserInfo.js';
 import './pages/index.css'
 import {profileEditBtn,
@@ -19,7 +19,7 @@ import {profileEditBtn,
 } from './scripts/utils/constants.js'
 // console.log(inputName)//разобраться
 import {Api} from './scripts/components/Api.js'
-
+import PopupWithConfirm from './scripts/components/PopupWithConfirm.js'
 
 
 // экземпляр юзера
@@ -60,20 +60,22 @@ Promise.all([api.user(), api.cards()])
 
 
 
-
 // //экземпляр формы Профиля
 const popupFormProfile = new PopupWithForm('.popup_profile', editFormSumbutHadler);
 popupFormProfile.setEventListeners();
 
 // функция которую буду опрокидывать в PopupFormProfile
 function editFormSumbutHadler(dataFormPoup){
+  popupFormProfile.showTextSave(true)
   api.updateUser({
     name: dataFormPoup.name,
     about: dataFormPoup.work,
   }
   ).then((dataFormServer) =>{
     userInfoProfile.setUserInfo(dataFormServer)
+    popupFormProfile.showTextSave(false)
   })
+  
 }
 
 //открывание профиле Профиля
@@ -100,7 +102,8 @@ const cardsSection = new Section({
 
 // функция создания карточек
 function creatCard(data) {
-  const cardElement = new Card(data,'#card-template',handleCardClick,currentUserId);
+  const cardElement = new Card(data,'#card-template',handleCardClick,currentUserId,PopupWithDeleteCard.sumbitHandler,api);
+  
   return cardElement.getElement();
 }
 //экземпляр карточек
@@ -110,19 +113,23 @@ popupFormCards.setEventListeners();
 
 // //отправка формы для карточек
 function formAddCardSubmitHandler() {
+  popupFormCards.showTextSave(true)
   api.postCards({
     name:inputName.value,
     link:inputDescription.value
   }
   ).then((serverCard) =>{
     cardsSection.addItem(creatCard(serverCard))
+    popupFormCards.showTextSave(false)
   })
 
   formElementCards.reset();
   closePopup(popupAddCards);
 }
 
-
+// удаления карточки из сервера
+const PopupWithDeleteCard = new PopupWithConfirm('.popup_delet',api)
+PopupWithDeleteCard.setEventListeners();
 // создание попапа превью
 const popupImage = new PopupWithImage('.popup_preview');
 popupImage.setEventListeners();

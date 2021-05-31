@@ -1,24 +1,29 @@
-import PopupWithDelet from './PopupWithDelet.js'
 export class Card{
 
-    constructor(cardData,cardTemplateId,handleCardClick,currentUserId){
+    constructor(cardData,cardTemplateId,handleCardClick,currentUserId,sumbitHandler,api){
 
-        
         this.cardData = cardData;
+        this.api = api;
+    
         this.cardTemplateId = cardTemplateId;
         this._handleCardClick = handleCardClick;
 
-        
+        //метод сбора инфы
+        this.sumbitHandler = sumbitHandler;
 
         this.cardElement = this._makeCard();
         this._makeEventListeners();
         this.elementLike = this.cardElement.querySelector(".element__like");
         this.itemElementCard =this.cardElement.querySelector('.directors__item');
 
-        
-        this._ownerId =this.cardData.owner._id;//ид  карты
-        this._userId = currentUserId;//ид мои
- 
+        this.liked = false;
+
+        this.likesCounter =  this.cardElement.querySelector('.element__likes-click');
+
+        this._ownerId = cardData.owner._id;// ид владельца карточки
+        this._userId = currentUserId;//мои ид 
+        this.idCard = cardData._id // ид карт
+
         this.removeDeleteButton ()
     }
     //проверка на ид и удаляет корзину удаления
@@ -34,16 +39,15 @@ export class Card{
         const cardElement = cardTemplate.cloneNode(true);
         const image = cardElement.querySelector('.element__image');
         const title = cardElement.querySelector(".element__place-travel");
-
-        // Выбираем  элементы с классом like
-        const likes = cardElement.querySelector('.element__likes-click');
-        likes.textContent =  this.cardData.likes.length;
-
+       
+        // // Выбираем  элементы с классом like
+        const likesCounter = cardElement.querySelector('.element__likes-click');
+        likesCounter.textContent =  this.cardData.likes.length;
 
         image.src = this.cardData.link;
         image.alt = this.cardData.name;
         title.textContent = this.cardData.name;
-
+        this.isLiked()
         return cardElement;
 
     }
@@ -51,41 +55,53 @@ export class Card{
         this._handleCardClick(this.cardData);
 
     }
- 
+    //переключает стиль для сердечко
     _like(){
-       
         this.elementLike.classList.toggle("element__like_active");
-   
     }
-    _deleteCard(){
-        const popupFormDelet = new PopupWithDelet('.popup__delet');
-        this.itemElementCard.remove();
-        popupFormDelet.close();
+    //пробегаеться по лайкам если средих них мои и красит его в черный если да
+    isLiked(){
+        this.cardData.likes.forEach((like)=>{
+            if(like._id === this._userId){
+                this.liked = true;
+                this._like();
+            }
+        })
+    }
+    //запрос на количество лайков с сервера 
+    counterLike(){
+        if(!this.liked ){
+            this.api.plusLike(this.idCard)
+            .then(res =>{
+                this.likesCounter.textContent = res.likes.length;
+                this.liked=true;
+            })
+        }else{
+            this.api.munesLike(this.idCard)
+            .then(res =>{
+                this.likesCounter.textContent = res.likes.length;
+                this.liked =false;
+            })
+        }
+        this._like();
     }
 
-    //попап вопрос об удаления
-    _deletQuestionPopup(){
-         //экземпляр формы удаления
-        const popupFormDelet = new PopupWithDelet('.popup__delet',()=>{
-            this.itemElementCard.remove()
-        });
-        popupFormDelet.open();
-        popupFormDelet.setEventListeners();
-
+    openPopupConfirm(){
+        this.sumbitHandler(this.itemElementCard,this.idCard)
     }
+    //метод едлемента удаления
+
 
     _makeEventListeners(){
         const elementLike = this.cardElement.querySelector(".element__like");
         const basketIconDelet = this.cardElement.querySelector('.element__backet');
         const previewImg = this.cardElement.querySelector('.element__image')
+ 
 
-    //    //кнопка ответа ДА
-    //     const deletBtn = document.querySelector('.popup__btn-yes');
-    //     deletBtn.addEventListener("click", () => this._deleteCard());
 
-        elementLike.addEventListener("click", () => this._like());
+        elementLike.addEventListener("click", () => this.counterLike());
         //сюда передаю вопрос удалить или нет
-        basketIconDelet.addEventListener("click", () => this._deletQuestionPopup());
+        basketIconDelet.addEventListener("click", () => this.openPopupConfirm());
         
         previewImg.addEventListener("click", () => this._openImagePopup());
     }

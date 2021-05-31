@@ -83,10 +83,11 @@ class Api {
     }
 
     deleteCards(id) {
-      return fetch(`${this.address}/cards/${id}`, {
+      return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/${id}`, {
           method: 'DELETE',
           headers: {
-              authorization: this._token,
+              authorization: '43b98874-8a2f-4742-91c1-202875e69e98',
+              'Content-Type': 'application/json'
           },
       })
           .then(result => {
@@ -94,10 +95,44 @@ class Api {
                   return result.json()
               } else {
                   return Promise.reject(`Ошибка: ${result.status}`)
+                  // return Promise.reject(`Ошибка: ${this.address}`)
               }
           })
   }
-    
-
-
+  plusLike(id) {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
+        method: 'PUT',
+        headers: {
+            authorization: '43b98874-8a2f-4742-91c1-202875e69e98',
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(result => {
+            if (result.ok) {
+                return result.json()
+            } else {
+                return Promise.reject(`Ошибка: ${result.status}`)
+                // return Promise.reject(`Ошибка: ${this.address}`)
+            }
+        })
   }
+
+  munesLike(id) {
+  return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
+      method: 'DELETE',
+      headers: {
+          authorization: '43b98874-8a2f-4742-91c1-202875e69e98',
+          'Content-Type': 'application/json'
+      },
+  })
+      .then(result => {
+          if (result.ok) {
+              return result.json()
+          } else {
+              return Promise.reject(`Ошибка: ${result.status}`)
+              // return Promise.reject(`Ошибка: ${this.address}`)
+          }
+      })
+  }
+
+}
