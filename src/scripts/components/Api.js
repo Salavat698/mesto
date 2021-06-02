@@ -38,6 +38,26 @@ class Api {
                 }
             });
   }
+  
+  updateAvatar(data) {
+    return fetch(`${this.address}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {avatar:data}
+      )
+    })    
+    .then(result => {
+              if (result.ok) {
+                  return result.json()
+              } else {
+                  return Promise.reject(`Ошибка: ${result.status}`)
+              }
+          });
+}
 
 
     cards(){

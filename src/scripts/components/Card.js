@@ -4,20 +4,15 @@ export class Card{
 
         this.cardData = cardData;
         this.api = api;
-    
         this.cardTemplateId = cardTemplateId;
         this._handleCardClick = handleCardClick;
-
         //метод сбора инфы
         this.sumbitHandler = sumbitHandler;
-
         this.cardElement = this._makeCard();
         this._makeEventListeners();
         this.elementLike = this.cardElement.querySelector(".element__like");
         this.itemElementCard =this.cardElement.querySelector('.directors__item');
-
-        this.liked = false;
-
+        this.liked = false;//просто для проверки
         this.likesCounter =  this.cardElement.querySelector('.element__likes-click');
 
         this._ownerId = cardData.owner._id;// ид владельца карточки
@@ -25,6 +20,7 @@ export class Card{
         this.idCard = cardData._id // ид карт
 
         this.removeDeleteButton ()
+        this.isLiked()
     }
     //проверка на ид и удаляет корзину удаления
     removeDeleteButton () {
@@ -39,15 +35,13 @@ export class Card{
         const cardElement = cardTemplate.cloneNode(true);
         const image = cardElement.querySelector('.element__image');
         const title = cardElement.querySelector(".element__place-travel");
-       
-        // // Выбираем  элементы с классом like
         const likesCounter = cardElement.querySelector('.element__likes-click');
-        likesCounter.textContent =  this.cardData.likes.length;
 
+        likesCounter.textContent =  this.cardData.likes.length;
         image.src = this.cardData.link;
         image.alt = this.cardData.name;
         title.textContent = this.cardData.name;
-        this.isLiked()
+       
         return cardElement;
 
     }
@@ -85,24 +79,18 @@ export class Card{
         }
         this._like();
     }
-
+    //метод едлемента удаления
     openPopupConfirm(){
         this.sumbitHandler(this.itemElementCard,this.idCard)
     }
-    //метод едлемента удаления
-
 
     _makeEventListeners(){
         const elementLike = this.cardElement.querySelector(".element__like");
         const basketIconDelet = this.cardElement.querySelector('.element__backet');
         const previewImg = this.cardElement.querySelector('.element__image')
  
-
-
         elementLike.addEventListener("click", () => this.counterLike());
-        //сюда передаю вопрос удалить или нет
         basketIconDelet.addEventListener("click", () => this.openPopupConfirm());
-        
         previewImg.addEventListener("click", () => this._openImagePopup());
     }
 

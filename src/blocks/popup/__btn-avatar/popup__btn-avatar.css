@@ -1,0 +1,11 @@
+.popup__btn-avatar{
+    margin-top: 48px;
+    margin-bottom: 48px;
+    align-self: flex-start;
+}
+
+@media (max-width:553px){
+    .popup__btn-avatar{
+        max-width: 238px;
+    }
+}

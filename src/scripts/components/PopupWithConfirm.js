@@ -4,7 +4,6 @@ import Popup from './Popup.js'
   constructor(popupSelector,api) {
     super(popupSelector)
     this.api = api;
-   
     this.deletBtn = document.querySelector('.popup__btn-yes');
     //форма вопрос удаления
     this.formDelet = document.querySelector('.popup__container-delet')

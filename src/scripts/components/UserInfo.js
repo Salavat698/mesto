@@ -3,7 +3,7 @@ export default class UserInfo{
       this.data = data;   
       this.userName = document.querySelector(this.data.name);
       this.userCommit = document.querySelector(this.data.about); 
-      this.avatar = document.querySelector(this.data.avatar)
+      this.userAvatar = document.querySelector(this.data.avatar);
     }
   
     getUserInfo() {
@@ -13,8 +13,11 @@ export default class UserInfo{
     setUserInfo(values) {
       this.userName.textContent= values.name;
       this.userCommit.textContent = values.about;
-      this.avatar.src = values.avatar;
+      this.userAvatar.src = values.avatar;
     }
+    setUserAvatar(userLink) {
+      this.userAvatar.src = userLink;
+    };
   
   }
   

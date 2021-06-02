@@ -16,9 +16,16 @@
     
         <main class="page">
             
-
+            <!-- src="<%=require('./images/avata-kysto.jpg')%>" -->
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/avata-kysto.jpg')%>" alt="автарка автора">
+                
+                <div class="profile__top-avatar">
+                    <button class="profile__avatar-edit"  type="button">
+                        <img class="profile__avatar" src="<%=require('./images/avata-kysto.jpg')%>" alt="автарка автора">
+                    </button>
+                </div>
+                 
+
                 <div class="profile__info">
                     <div class="profile__header-info">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -89,14 +96,28 @@
             </form>
 
         </div>
+
+        <div class="popup popup_avatar">
+            <form class="popup__container popup__container-avatar" action="#" method='POST' name='popup-container' novalidate>
+                <button class="popup__close popup__close_yes" type="button"></button>
+                <p class="popup__question popup__question-avatar">Обновить аватар</p>
+
+                <input  class="popup__input popup__input-avatar" id="url-avatar" name="avatar"  type="url"  placeholder="Ссылка на новый аватар" required>
+                <span  id="url-avatar--error" class="popup__input-error "></span>
+
+                <button type="submit" class="popup__save-btn popup__save-btn_disabled popup__avatar-btn_position" disabled>Сохранить</button>
+            </form>
+        </div>
         
         <div class="popup popup_delet">
-            <form class="popup__container-delet">
+            <form class=" popup__container-delet">
                 <button class="popup__close popup__close_yes" type="button"></button>
                 <p class="popup__question">Вы уверены?</p>
                 <button type="submit" class="popup__btn-yes">Да</button>
             </form>
         </div>
+
+
 
         <div class="popup popup_preview">
             
@@ -126,10 +147,7 @@
                     <button class="element__like" type="button" aria-label="Like"></button>
                     <div class="element__likes-click">0</div>
                 </div>
-               
-
-                <!-- <button class="btn">Clcc</button>
-                <div class="likes">22</div> -->
+                
               </div>
             </div>
         </template>

@@ -1,0 +1,33 @@
+.profile__avatar-edit {
+    border-radius: 50%;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+
+    text-decoration: none;
+    user-select: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    background-color: black;
+    color:black;
+   
+}
+
+.profile__avatar-edit::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .8) url(../../../images/Vector-avatar.svg) no-repeat center center;
+    background-size: 26px 26px;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+.profile__avatar-edit:hover::after {
+    opacity: 1;
+}

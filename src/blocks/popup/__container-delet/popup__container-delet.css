@@ -12,3 +12,17 @@
     margin: auto;
     justify-content: center;
 }
+/* max-width: 282px; */
+
+@media (max-width:553px){
+    .popup__container-delet{
+        max-width: 238px;
+    }
+}
+
+
+@media (max-width:350px){
+    .popup__container-delet{
+        max-width: 230px;
+    }
+}

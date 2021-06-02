@@ -13,8 +13,8 @@
     cursor: pointer;
 }
 
-/* @media screen and (max-width:508px) {
+@media (max-width:553px){
     .popup__btn-yes{
-        max-width: 282px;
+        max-width: 238px;
     }
-} */
+}

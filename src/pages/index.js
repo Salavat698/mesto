@@ -1,14 +1,12 @@
-import {Card} from './scripts/components/Card.js';
-import {FormValidate} from './scripts/components/FormValidate.js';
-import{closePopup} from './scripts/utils/utils.js';
-import Section from './scripts/components/Section.js';
-import PopupWithForm from './scripts/components/PopupWithForm.js';
-import PopupWithImage from './scripts/components/PopupWithImage.js';
-import PopupWithDelet from './scripts/components/PopupWithConfirm.js';
-import UserInfo from './scripts/components/UserInfo.js';
-import './pages/index.css'
+import {Card} from '../scripts/components/Card.js';
+import {FormValidate} from '../scripts/components/FormValidate.js';
+import{closePopup} from '../scripts/utils/utils.js';
+import Section from '../scripts/components/Section.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import UserInfo from '../scripts/components/UserInfo.js';
+import './index.css'
 import {profileEditBtn,
-  initialCards,
   formElement,
   profileAddBtn,
   popupAddCards,
@@ -16,10 +14,9 @@ import {profileEditBtn,
   inputName,
   inputDescription,
   validationConfig,
-} from './scripts/utils/constants.js'
-// console.log(inputName)//разобраться
-import {Api} from './scripts/components/Api.js'
-import PopupWithConfirm from './scripts/components/PopupWithConfirm.js'
+} from '../scripts/utils/constants.js'
+import {Api} from '../scripts/components/Api.js'
+import PopupWithConfirm from '../scripts/components/PopupWithConfirm.js'
 
 
 // экземпляр юзера
@@ -40,7 +37,7 @@ Promise.all([api.user(), api.cards()])
       userInfoProfile.setUserInfo({
         name: userData.name,
         about: userData.about,
-        avatar: userData.avatar
+        avatar: userData.avatar,
       })
 
       const cardsSection = new Section({
@@ -57,6 +54,32 @@ Promise.all([api.user(), api.cards()])
     .catch((err) => {
         console.log(`Вот, что произошло. ${err}`);
     });
+
+// Avatar
+const avatarEditBtn = document.querySelector('.profile__avatar-edit')
+
+const avatarEditPopup = new PopupWithForm ('.popup_avatar',handleLoadUserAvatar)
+avatarEditPopup.setEventListeners();
+
+function handleLoadUserAvatar (inputData) {
+  // avatarEditPopup.showTextSave(true)
+  function ava (item){
+    userInfoProfile.setUserAvatar(item.avatar);
+  }
+  
+  api.updateAvatar(inputData.avatar)
+  .then((res)=> ava(res))
+    // avatarEditPopup.showSavingText(false);)
+  .catch((err)=>{
+    console.log(err)
+  })
+}
+
+//открываю Автар попап
+avatarEditBtn.addEventListener('click',function() {
+  avatarEditPopup.open()
+
+})
 
 
 
@@ -82,8 +105,10 @@ function editFormSumbutHadler(dataFormPoup){
 profileEditBtn.addEventListener('click', function(){
   popupFormProfile.open();
   const data = userInfoProfile.getUserInfo()
-  inputName.value = data.name
-  inputDescription.value = data.about
+  const nameInput = document.querySelector('#name-input');
+  const workInput =  document.querySelector('#work-input');
+  nameInput.value = data.name
+  workInput.value = data.about
 
 });
 
@@ -103,7 +128,6 @@ const cardsSection = new Section({
 // функция создания карточек
 function creatCard(data) {
   const cardElement = new Card(data,'#card-template',handleCardClick,currentUserId,PopupWithDeleteCard.sumbitHandler,api);
-  
   return cardElement.getElement();
 }
 //экземпляр карточек
@@ -136,17 +160,23 @@ popupImage.setEventListeners();
 
 // функция передачи данных для открытия первью карточки
 function handleCardClick (data) {
+
   return popupImage.open(data);
 }
-
 
 
 // // открывание карточек
 profileAddBtn.addEventListener('click',function(){
   popupFormCards.open();
+  formElementCards.reset();
   validatorEditProfile.resetFormState()//очищение формы при открытий
 });
 
+
+const avatarElementPopup = document.querySelector('.popup__container-avatar')
+// валидаций авaтара
+const validatorAvatar = new FormValidate(validationConfig,avatarElementPopup);
+validatorAvatar.enableValidation();
 
 
 //валидаций профиля
