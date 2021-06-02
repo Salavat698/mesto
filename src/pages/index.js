@@ -79,6 +79,7 @@ function handleLoadUserAvatar (inputData) {
 avatarEditBtn.addEventListener('click',function() {
   avatarEditPopup.open()
 
+
 })
 
 
