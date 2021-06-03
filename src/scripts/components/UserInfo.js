@@ -7,13 +7,21 @@ export default class UserInfo{
     }
   
     getUserInfo() {
-      return {name: this.userName.textContent, about: this.userCommit.textContent}
+      return {
+        name: this.userName.textContent, 
+        about: this.userCommit.textContent,
+        avatar: this.userAvatar.values}
     }
   
     setUserInfo(values) {
-      this.userName.textContent= values.name;
-      this.userCommit.textContent = values.about;
-      this.userAvatar.src = values.avatar;
+      if(values.name,values.about, values.avatar){
+        this.userName.textContent= values.name;
+        this.userCommit.textContent = values.about;
+        this.userAvatar.src = values.avatar;
+      }else{
+        console.log(`Беда:${values}`)
+      }
+   
     }
     setUserAvatar(userLink) {
       this.userAvatar.src = userLink;

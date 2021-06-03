@@ -62,16 +62,20 @@ export class Card{
             }
         })
     }
-    //запрос на количество лайков с сервера 
+    // А в чем проблема если запросы оставить здесь ? сделать приватными методами.
+    // Если переносить щас в index.js 
+    // У меня нету там значений таких как 
+    // this.idCard this.likesCounter this.liked
+    // ЭТО снова переделывать такой обьем работы !? или я чет не так понял =( ...
     counterLike(){
         if(!this.liked ){
-            this.api.plusLike(this.idCard)
+            this.api.addLike(this.idCard)
             .then(res =>{
                 this.likesCounter.textContent = res.likes.length;
                 this.liked=true;
             })
         }else{
-            this.api.munesLike(this.idCard)
+            this.api.removeLike(this.idCard)
             .then(res =>{
                 this.likesCounter.textContent = res.likes.length;
                 this.liked =false;

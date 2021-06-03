@@ -14,14 +14,20 @@ import Popup from './Popup.js'
     super.setEventListeners()
     this.formDelet.addEventListener('click',(evt)=>{
       evt.preventDefault();
-      this.api.deleteCards( this.id)
+          // А в чем проблема если запросы оставить здесь ? сделать приватными методами.
+          // Если переносить щас в index.js 
+          // У меня нету там значений таких как 
+          //  this.cardEl , this.id
+          // ЭТО снова переделывать такой обьем работы !? или я чет не так понял =( ...
+      this.api.deleteCard( this.id)
       .then(() =>{
         this.cardEl.remove()
+        this.close()
       })
       .catch(err =>{
         console.log(err)
       })
-      this.close()
+     
     })
   }
 

@@ -4,7 +4,14 @@ class Api {
       this.address = address;
       this.token = token;
     }
-    user(){
+    checkStatus(result){
+      if (result.ok) {
+        return result.json()
+    } else {
+        return Promise.reject(`Ошибка: ${result.status}`)
+    }
+    }
+    getUserInfo(){
       return fetch(`${this.address}/users/me`, {
         method:'GET',
           headers: {
@@ -12,11 +19,7 @@ class Api {
           }
         })
         .then(result => {
-          if (result.ok) {
-              return result.json()
-          } else {
-              return Promise.reject(`Ошибка: ${result.status}`)
-          }
+          return this.checkStatus(result)
       })
     }
 
@@ -31,12 +34,8 @@ class Api {
         body: JSON.stringify({ name,about})
       })    
       .then(result => {
-                if (result.ok) {
-                    return result.json()
-                } else {
-                    return Promise.reject(`Ошибка: ${result.status}`)
-                }
-            });
+        return this.checkStatus(result)
+      });
   }
   
   updateAvatar(data) {
@@ -51,16 +50,12 @@ class Api {
       )
     })    
     .then(result => {
-              if (result.ok) {
-                  return result.json()
-              } else {
-                  return Promise.reject(`Ошибка: ${result.status}`)
-              }
+      return this.checkStatus(result)
           });
 }
 
 
-    cards(){
+getInitialCards(){
       return fetch(`${this.address}/cards`, {
         method:'GET',
           headers: {
@@ -68,12 +63,7 @@ class Api {
           }
         })
         .then(result => {
-          if (result.ok) {
-              return result.json()
-          } else {
-              return Promise.reject(`Ошибка: ${result.status}`)
-          }
-          
+          return this.checkStatus(result)
       })
       .then(
         data =>
@@ -84,7 +74,7 @@ class Api {
       )
     }
 
-    postCards({ name,link}){
+    addCard({ name,link}){
       return fetch(`${this.address}/cards`, {
         method:'POST',
           headers: {
@@ -94,15 +84,11 @@ class Api {
           body: JSON.stringify({ name,link})
         })
         .then(result => {
-          if (result.ok) {
-              return result.json()
-          } else {
-              return Promise.reject(`Ошибка: ${result.status}`)
-          }
+          return this.checkStatus(result)
       })
     }
 
-    deleteCards(id) {
+    deleteCard(id) {
       return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/${id}`, {
           method: 'DELETE',
           headers: {
@@ -111,15 +97,10 @@ class Api {
           },
       })
           .then(result => {
-              if (result.ok) {
-                  return result.json()
-              } else {
-                  return Promise.reject(`Ошибка: ${result.status}`)
-                  // return Promise.reject(`Ошибка: ${this.address}`)
-              }
+            return this.checkStatus(result)
           })
   }
-  plusLike(id) {
+  addLike(id) {
     return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
         method: 'PUT',
         headers: {
@@ -128,16 +109,11 @@ class Api {
         },
     })
         .then(result => {
-            if (result.ok) {
-                return result.json()
-            } else {
-                return Promise.reject(`Ошибка: ${result.status}`)
-                // return Promise.reject(`Ошибка: ${this.address}`)
-            }
+          return this.checkStatus(result)
         })
   }
 
-  munesLike(id) {
+  removeLike(id) {
   return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
       method: 'DELETE',
       headers: {
@@ -146,12 +122,7 @@ class Api {
       },
   })
       .then(result => {
-          if (result.ok) {
-              return result.json()
-          } else {
-              return Promise.reject(`Ошибка: ${result.status}`)
-              // return Promise.reject(`Ошибка: ${this.address}`)
-          }
+        return this.checkStatus(result)
       })
   }
 
