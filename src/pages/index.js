@@ -128,7 +128,7 @@ profileEditBtn.addEventListener('click', function(){
   const data = userInfoProfile.getUserInfo()
   nameInput.value = data.name
   workInput.value = data.about
-  // formElement.resetFormState()
+  validatorAddCard.resetFormState()
 });
 
 // Section экземпляр
