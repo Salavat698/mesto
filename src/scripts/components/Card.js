@@ -1,7 +1,6 @@
 export class Card{
 
     constructor(cardData,cardTemplateId,handleCardClick,currentUserId,sumbitHandler,api){
-
         this.cardData = cardData;
         this.api = api;
         this.cardTemplateId = cardTemplateId;
@@ -18,10 +17,16 @@ export class Card{
         this._ownerId = cardData.owner._id;// ид владельца карточки
         this._userId = currentUserId;//мои ид 
         this.idCard = cardData._id // ид карт
+        // console.log(this.idCard)
+
 
         this.removeDeleteButton ()
         this.isLiked()
     }
+    // idCard(){
+    //     return  this.idCard;
+    // }
+
     //проверка на ид и удаляет корзину удаления
     removeDeleteButton () {
         this.basketIconDeletBtn = this.cardElement.querySelector('.element__backet');
@@ -74,12 +79,18 @@ export class Card{
                 this.likesCounter.textContent = res.likes.length;
                 this.liked=true;
             })
+            .catch(err =>{
+                console.log(err)
+              })
         }else{
             this.api.removeLike(this.idCard)
             .then(res =>{
                 this.likesCounter.textContent = res.likes.length;
                 this.liked =false;
             })
+            .catch(err =>{
+                console.log(err)
+              })
         }
         this._like();
     }

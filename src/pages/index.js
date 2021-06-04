@@ -67,7 +67,6 @@ validatorAvatar.enableValidation();
 
 // Avatar
 const avatarEditBtn = document.querySelector('.profile__avatar-edit')
-
 const avatarEditPopup = new PopupWithForm ('.popup_avatar',handleLoadUserAvatar)
 avatarEditPopup.setEventListeners();
 
@@ -144,9 +143,50 @@ const cardsSection = new Section({
 
 // функция создания карточек
 function creatCard(data) {
-  const cardElement = new Card(data,'#card-template',handleCardClick,currentUserId,popupWithDeleteCard.sumbitHandler,api);
+  const cardElement = new Card(
+    data,
+    '#card-template',
+    handleCardClick,
+    currentUserId,
+    popupWithDeleteCard.sumbitHandler,
+    // handleLikeClick
+    api
+    );
   return cardElement.getElement();
 }
+// ПЫТАСЮ ВЫТАЩИТЬ ДАННЫЕ ИД КАРТЫ ЧЕТ НЕ ВЫХОДИТ!
+// И про сделать запрос здесь я правильно делаю, то есть Вы это имели ввиду?
+// и да наставнику уже написал ....
+//   // const idCard = creatCard.idCard();
+//   // console.log(idCard)
+
+
+// function handleLikeClick(){
+//   likesCounter =  document.querySelector('.element__likes-click');
+//   // const idCard = creatCard.idCard();
+//   // console.log(idCard)
+//   const liked = false
+//   if(!liked ){
+//     api.addLike(idCard)
+//     .then(res =>{
+//         likesCounter.textContent = res.likes.length;
+//         liked=true;
+//     })
+//     .catch(err =>{
+//         console.log(err)
+//       })
+// }else{
+//     this.api.removeLike(idCard)
+//     .then(res =>{
+//         likesCounter.textContent = res.likes.length;
+//         liked =false;
+//     })
+//     .catch(err =>{
+//         console.log(err)
+//       })
+// }
+// this._like();
+// }
 //экземпляр карточек
 const popupFormCards = new PopupWithForm('.popup_add-cards', formAddCardSubmitHandler);
 popupFormCards.setEventListeners();
@@ -172,9 +212,22 @@ function formAddCardSubmitHandler() {
 }
 
 // удаления карточки из сервера
-const popupWithDeleteCard = new PopupWithConfirm('.popup_delet',api)
+const popupWithDeleteCard = new PopupWithConfirm('.popup_delet',hendlerRemoveDeletCard)
 popupWithDeleteCard.setEventListeners();
 
+function hendlerRemoveDeletCard(){
+  const cardElement =popupWithDeleteCard.cardElement();
+  const idOwen =popupWithDeleteCard.idOwen();
+
+  api.deleteCard(idOwen)
+  .then(() =>{
+    cardElement.remove();
+    popupWithDeleteCard.close();
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+}
 
 // создание попапа превью
 const popupImage = new PopupWithImage('.popup_preview');
