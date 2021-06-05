@@ -1,4 +1,4 @@
-export {enableEscListener,openPopup,handleEscListener,isEscEvt,closePopup,closeByOverlayClick,popups}
+export {closePopup,closeByOverlayClick,popups}
 
 
 //слушатель на документ 

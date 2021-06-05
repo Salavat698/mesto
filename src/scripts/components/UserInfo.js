@@ -14,7 +14,7 @@ export default class UserInfo{
     }
   
     setUserInfo(values) {
-      if(values.name,values.about, values.avatar){
+      if(values.name && values.about && values.avatar){
         this.userName.textContent= values.name;
         this.userCommit.textContent = values.about;
         this.userAvatar.src = values.avatar;

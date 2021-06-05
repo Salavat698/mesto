@@ -4,7 +4,7 @@ class Api {
       this.address = address;
       this.token = token;
     }
-    checkStatus(result){
+    _checkStatus(result){
       if (result.ok) {
         return result.json()
     } else {
@@ -19,7 +19,7 @@ class Api {
           }
         })
         .then(result => {
-          return this.checkStatus(result)
+          return this._checkStatus(result)
       })
     }
 
@@ -34,7 +34,7 @@ class Api {
         body: JSON.stringify({ name,about})
       })    
       .then(result => {
-        return this.checkStatus(result)
+        return this._checkStatus(result)
       });
   }
   
@@ -50,7 +50,7 @@ class Api {
       )
     })    
     .then(result => {
-      return this.checkStatus(result)
+      return this._checkStatus(result)
           });
 }
 
@@ -63,7 +63,7 @@ getInitialCards(){
           }
         })
         .then(result => {
-          return this.checkStatus(result)
+          return this._checkStatus(result)
       })
       .then(
         data =>
@@ -84,7 +84,7 @@ getInitialCards(){
           body: JSON.stringify({ name,link})
         })
         .then(result => {
-          return this.checkStatus(result)
+          return this._checkStatus(result)
       })
     }
 
@@ -97,7 +97,7 @@ getInitialCards(){
           },
       })
           .then(result => {
-            return this.checkStatus(result)
+            return this._checkStatus(result)
           })
   }
   addLike(id) {
@@ -109,12 +109,12 @@ getInitialCards(){
         },
     })
         .then(result => {
-          return this.checkStatus(result)
+          return this._checkStatus(result)
         })
   }
 
   removeLike(id) {
-  return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
+  return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`,{
       method: 'DELETE',
       headers: {
           authorization: '43b98874-8a2f-4742-91c1-202875e69e98',
@@ -122,8 +122,11 @@ getInitialCards(){
       },
   })
       .then(result => {
-        return this.checkStatus(result)
+        return this._checkStatus(result)
       })
   }
-
+  like (cardId, isLiked) {
+    return isLiked ? this.removeLike(cardId) : this.addLike(cardId);
+  }
 }
+  

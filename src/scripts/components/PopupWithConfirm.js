@@ -1,9 +1,9 @@
 import Popup from './Popup.js'
 
  export default class PopupWithConfirm extends Popup {
-  constructor(popupSelector,hendlerRemoveDeletCard) {
+  constructor(popupSelector,removeCardHandler) {
     super(popupSelector)
-    this.hendlerRemoveDeletCard = hendlerRemoveDeletCard;
+    this._removeCardHandler = removeCardHandler;
     this.deletBtn = document.querySelector('.popup__btn-yes');
     //форма вопрос удаления
     this.formDelet = document.querySelector('.popup__container-delet')
@@ -14,14 +14,14 @@ import Popup from './Popup.js'
     super.setEventListeners()
     this.formDelet.addEventListener('click',(evt)=>{
       evt.preventDefault();
-      this.hendlerRemoveDeletCard();
+      this._removeCardHandler();
     })
   }
-  cardElement(){
+  getCardElement(){
     return this.cardEl;
   }
 
-  idOwen(){
+  getOwnerId(){
     return this.id;
   }
 

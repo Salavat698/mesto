@@ -1,6 +1,5 @@
 import {Card} from '../scripts/components/Card.js';
-import {FormValidate} from '../scripts/components/FormValidate.js';
-import{closePopup} from '../scripts/utils/utils.js';
+import {FormValidator} from '../scripts/components/FormValidate.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
@@ -21,7 +20,7 @@ import {
 
 import {Api} from '../scripts/components/Api.js'
 import PopupWithConfirm from '../scripts/components/PopupWithConfirm.js'
-
+import {closePopup,closeByOverlayClick,popups} from '../scripts/utils/utils.js';
 
 
 // экземпляр юзера
@@ -34,6 +33,8 @@ const api= new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-24',
   token: '43b98874-8a2f-4742-91c1-202875e69e98',
 })
+
+const containerElement = document.querySelector('.element');
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([userData, userCard]) => {
@@ -48,10 +49,10 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       const cardsSection = new Section({
         items: userCard,
         renderer: (items) => {
-          const cardElement = creatCard(items);
+          const cardElement = createCard(items);
           cardsSection.addItem(cardElement);
         }
-    }, '.element');
+    }, containerElement);
     cardsSection.render();
 
 
@@ -62,7 +63,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
 // валидаций авaтара
 const avatarElementPopup = document.querySelector('.popup__container-avatar')
-const validatorAvatar = new FormValidate(validationConfig,avatarElementPopup);
+const validatorAvatar = new FormValidator(validationConfig,avatarElementPopup);
 validatorAvatar.enableValidation();
 
 // Avatar
@@ -118,7 +119,7 @@ function editFormSubmitHandler(dataFormPoup){
 }
 
 //валидаций профиля
-const validatorAddCard = new FormValidate(validationConfig,formElement);
+const validatorAddCard = new FormValidator(validationConfig,formElement);
 validatorAddCard.enableValidation();
 
 //открывание профиле Профиля
@@ -139,54 +140,34 @@ const cardsSection = new Section({
           cardsSection.addItem(cardElement);
       })
   }
-}, '.element');
+}, containerElement);
 
-// функция создания карточек
-function creatCard(data) {
+
+
+
+// // функция создания карточек
+function createCard(data) {
   const cardElement = new Card(
     data,
     '#card-template',
     handleCardClick,
     currentUserId,
     popupWithDeleteCard.sumbitHandler,
-    // handleLikeClick
-    api
-    );
+    likeCard,
+    
+  );
   return cardElement.getElement();
 }
-// ПЫТАСЮ ВЫТАЩИТЬ ДАННЫЕ ИД КАРТЫ ЧЕТ НЕ ВЫХОДИТ!
-// И про сделать запрос здесь я правильно делаю, то есть Вы это имели ввиду?
-// и да наставнику уже написал ....
-//   // const idCard = creatCard.idCard();
-//   // console.log(idCard)
+
+function likeCard(card){
+  
+  api.like(card.getId(),card.getIsLiked())
+  .then(res => {
+    card.updateLikesInfo(res.likes)
+  })
+}
 
 
-// function handleLikeClick(){
-//   likesCounter =  document.querySelector('.element__likes-click');
-//   // const idCard = creatCard.idCard();
-//   // console.log(idCard)
-//   const liked = false
-//   if(!liked ){
-//     api.addLike(idCard)
-//     .then(res =>{
-//         likesCounter.textContent = res.likes.length;
-//         liked=true;
-//     })
-//     .catch(err =>{
-//         console.log(err)
-//       })
-// }else{
-//     this.api.removeLike(idCard)
-//     .then(res =>{
-//         likesCounter.textContent = res.likes.length;
-//         liked =false;
-//     })
-//     .catch(err =>{
-//         console.log(err)
-//       })
-// }
-// this._like();
-// }
 //экземпляр карточек
 const popupFormCards = new PopupWithForm('.popup_add-cards', formAddCardSubmitHandler);
 popupFormCards.setEventListeners();
@@ -199,7 +180,7 @@ function formAddCardSubmitHandler() {
     link:inputDescription.value
   }
   ).then((serverCard) =>{
-    cardsSection.addItem(creatCard(serverCard))
+    cardsSection.addItem(createCard(serverCard))
     popupFormCards.close()
   })
   .catch((res)=>{
@@ -212,14 +193,14 @@ function formAddCardSubmitHandler() {
 }
 
 // удаления карточки из сервера
-const popupWithDeleteCard = new PopupWithConfirm('.popup_delet',hendlerRemoveDeletCard)
+const popupWithDeleteCard = new PopupWithConfirm('.popup_delet',removeCardHandler)
 popupWithDeleteCard.setEventListeners();
 
-function hendlerRemoveDeletCard(){
-  const cardElement =popupWithDeleteCard.cardElement();
-  const idOwen =popupWithDeleteCard.idOwen();
+function removeCardHandler(){
+  const cardElement =popupWithDeleteCard.getCardElement();
+  const ownerId =popupWithDeleteCard.getOwnerId();
 
-  api.deleteCard(idOwen)
+  api.deleteCard(ownerId)
   .then(() =>{
     cardElement.remove();
     popupWithDeleteCard.close();
@@ -246,5 +227,5 @@ profileAddBtn.addEventListener('click',function(){
 });
 
  //валидаций карт
- const validatorEditProfile = new FormValidate(validationConfig,formElementCards);
+ const validatorEditProfile = new FormValidator(validationConfig,formElementCards);
  validatorEditProfile.enableValidation();

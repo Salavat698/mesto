@@ -1,4 +1,4 @@
-export class FormValidate{
+export class FormValidator{
   constructor(validationConfig,form){
     this.validationConfig = validationConfig;
     this.form = form;
