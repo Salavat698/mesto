@@ -20,8 +20,6 @@ import {
 
 import {Api} from '../scripts/components/Api.js'
 import PopupWithConfirm from '../scripts/components/PopupWithConfirm.js'
-import {closePopup,closeByOverlayClick,popups} from '../scripts/utils/utils.js';
-
 
 // экземпляр юзера
 const userInfoProfile = new UserInfo(profileConfig);
@@ -144,32 +142,30 @@ const cardsSection = new Section({
 
 
 
-
 // // функция создания карточек
 function createCard(data) {
   const cardElement = new Card(
     data,
-    '#card-template',
     handleCardClick,
     currentUserId,
     popupWithDeleteCard.sumbitHandler,
     likeCard,
-    
   );
   return cardElement.getElement();
 }
 
 function likeCard(card){
-  
   api.like(card.getId(),card.getIsLiked())
   .then(res => {
     card.updateLikesInfo(res.likes)
   })
+  .catch((res)=>{
+    console.log(`"Вот что произошло":${res}`)
+  })
 }
-
-
+const popupAddCards = ('.popup_add-cards')
 //экземпляр карточек
-const popupFormCards = new PopupWithForm('.popup_add-cards', formAddCardSubmitHandler);
+const popupFormCards = new PopupWithForm(popupAddCards, formAddCardSubmitHandler);
 popupFormCards.setEventListeners();
 
 // //отправка формы для карточек
@@ -189,7 +185,6 @@ function formAddCardSubmitHandler() {
   .finally(()=>{
     popupFormCards.showTextSave(false)
   })
-  formElementCards.reset();
 }
 
 // удаления карточки из сервера
@@ -209,9 +204,9 @@ function removeCardHandler(){
     console.log(err)
   })
 }
-
+const popupPreview = ('.popup_preview')
 // создание попапа превью
-const popupImage = new PopupWithImage('.popup_preview');
+const popupImage = new PopupWithImage(popupPreview);
 popupImage.setEventListeners();
 
 // функция передачи данных для открытия первью карточки

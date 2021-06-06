@@ -1,4 +1,4 @@
-export {closePopup,closeByOverlayClick,popups}
+
 
 
 //слушатель на документ 
