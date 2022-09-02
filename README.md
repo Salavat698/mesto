@@ -15,3 +15,7 @@
 * JavaScript
 * html
 * bem
+
+### Запуск проект
+*npm init
+*npm start
