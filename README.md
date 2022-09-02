@@ -17,5 +17,5 @@
 * bem
 
 ### Запуск проект
-*npm init
-*npm start
+* npm init
+* npm start
